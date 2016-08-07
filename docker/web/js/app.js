@@ -34,22 +34,26 @@
             }
 
             $scope.colmClickHandler = function(idx, $event) {
-                if ($scope.NO_WINNER != $scope.winner || $scope.disableClick) {
-                    return;
-                }
-                var colm = $scope.findColm(angular.element($event.target));
-                if ($scope.addChip(colm, idx)) {
-                    $scope.nextColor();
-
-                    $scope.winner = $scope.findWinner($scope.board);
-
-                    if ($scope.NO_WINNER == $scope.winner) {
-                        $scope.disableClick = true;
-                        var promise = $timeout(function () {
-                            $scope.aiTurn();
-                            $scope.disableClick = false;
-                        }, 600);
+                try {
+                    if ($scope.NO_WINNER != $scope.winner || $scope.disableClick) {
+                        return;
                     }
+                    var colm = $scope.findColm(angular.element($event.target));
+                    if ($scope.addChip(colm, idx)) {
+                        $scope.nextColor();
+
+                        $scope.winner = $scope.findWinner($scope.board);
+
+                        if ($scope.NO_WINNER == $scope.winner) {
+                            $scope.disableClick = true;
+                            var promise = $timeout(function () {
+                                $scope.aiTurn();
+                                $scope.disableClick = false;
+                            }, 600);
+                        }
+                    }
+                } catch (ex) {
+                    console.error("Failure in colmClickHandler. " + ex);
                 }
             }
 
