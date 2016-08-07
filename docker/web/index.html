@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <style>
+        .noselect {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none;   /* Chrome/Safari/Opera */
+            -khtml-user-select: none;    /* Konqueror */
+            -moz-user-select: none;      /* Firefox */
+            -ms-user-select: none;       /* Internet Explorer/Edge */
+            user-select: none;
+        }
+        .game-container {
+            border: 1px solid #1E90FF;
+            background-color: #ABD6FF;
+            border-radius: 5px;
+            xdisplay: table; /*to center */
+            margin: 0 auto; /*to center */
+        }
+        .inner-colm {
+            position: relative;
+            top:0px;
+            left: 0px;
+            border: 1px solid #1E90FF;
+            display:inline-block;
+            box-sizing: border-box;
+        }
+        .winner {
+            border-radius:3px;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        .outer-container {
+            display: table; /*to center */
+            margin: 0 auto; /*to center */
+            border: 1px solid grey;
+            border-radius:3px;
+            padding: 15px;
+        }
+        body {
+            background-color: #EEEEEE;
+            padding-top:30px;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+        h1 {
+            font-size: 175%;
+        }
+    </style>
+</head>
+
+<body ng-app="con4">
+
+    <div ng-controller="con4-ctrlr" class="outer-container">
+        <h1>Connect Four</h1>
+        <div style="margin-bottom:10px;"><span>Winner: </span><span class='winner' style="border: 3px solid {{winner}};">{{winner}}</span></div>
+        <div>Select color:</div>
+        <input type="radio" ng-model="humanColor" value="red" ng-disabled="gameStarted"> Red<br>
+        <input type="radio" ng-model="humanColor" value="yellow" ng-disabled="gameStarted" ng-click="playAiTurn()"> Yellow<br>
+
+        <br/>
+        <div class='noselect game-container' style='width: {{numColms * colmWidth}}px; height: {{numRows * rowHeight}}px;'>
+            <colm class='noselect' ng-click="colmClickHandler($index, $event)" ng-repeat="col in board"></colm>
+        </div>
+
+    </div>
+</body>
+</html>
+
