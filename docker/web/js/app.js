@@ -4,9 +4,6 @@
     var module = angular.module('con4', [])
         .controller('con4-ctrlr', ['$scope', '$interval', '$timeout', '$compile', function ($scope, $interval, $timeout, $compile) {
 
-            $scope.greetMe = 'World bro';
-            $scope.test = 'World bro';
-            $scope.testName = 'my test name';
             $scope.numColms = 7;
             $scope.numRows = 6;
             $scope.colmWidth = 25;
