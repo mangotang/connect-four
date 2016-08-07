@@ -18,8 +18,16 @@
             border: 1px solid #1E90FF;
             background-color: #ABD6FF;
             border-radius: 5px;
-            xdisplay: table; /*to center */
+            ignore-display: table; /*to center */
             margin: 0 auto; /*to center */
+        }
+        .game-container colm:first-child .inner-colm {
+            border-radius: 5px 0 0 5px;
+            border: 1px solid #1E90FF;
+        }
+        .game-container colm:last-child .inner-colm {
+            border-radius: 0 5px 5px 0;
+            border: 1px solid #1E90FF;
         }
         .inner-colm {
             position: relative;

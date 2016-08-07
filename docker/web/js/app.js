@@ -61,7 +61,6 @@
             $scope.addChip = function(colm, idx) {
                 $scope.gameStarted = true;
                 var numChild = colm.find("*").length;
-
                 if (numChild < $scope.numRows) {
 
                     var colmHeight = $scope.rowHeight * $scope.numRows;
@@ -71,15 +70,31 @@
                     $scope.board[idx][numChild].color = $scope.currentColor;
 
                     var div = angular.element('<div class="noselect" style="cursor: default; position:absolute;top:'
-                        + top + 'px;left:0px; width:22px; height: 22px; border-radius: 11px; background-color:'
+                        + 0 + 'px;left:0px; width:22px; height: 22px; border-radius: 11px; background-color:'
                         + $scope.currentColor + '"></div>');
 
                     colm.append(div);
+
+                    // animate the drop
+                    var promise = $interval(function() {
+                        div[0].style.top = $scope.addPx(div[0].style.top, 1);
+                        if (top + "px" == div[0].style.top) {
+                            $interval.cancel(promise);
+                        }
+                    }, 5);
+
                     return true;
                 } else {
                     // skipping, column full
                     return false;
                 }
+            }
+
+            $scope.addPx = function(strVal, n) {
+                var strInt = strVal.replace("px", "");
+                var intVal = parseInt(strInt);
+                intVal += n;
+                return intVal + "px";
             }
 
             $scope.aiTurn = function() {
