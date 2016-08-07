@@ -77,9 +77,11 @@
 
                     // animate the drop
                     var promise = $interval(function() {
-                        div[0].style.top = $scope.addPx(div[0].style.top, 1);
-                        if (top + "px" == div[0].style.top) {
+                        var nextTop = parseInt(div[0].style.top.replace("px", "")) + 1;
+                        if (nextTop >= top) {
                             $interval.cancel(promise);
+                        } else {
+                            div[0].style.top = nextTop + "px";
                         }
                     }, 5);
 
@@ -88,13 +90,6 @@
                     // skipping, column full
                     return false;
                 }
-            }
-
-            $scope.addPx = function(strVal, n) {
-                var strInt = strVal.replace("px", "");
-                var intVal = parseInt(strInt);
-                intVal += n;
-                return intVal + "px";
             }
 
             $scope.aiTurn = function() {
